@@ -8,6 +8,7 @@
     Open console tab in dev tools!
 
     <script src="libs/requirejs.min.js"></script>
+    <script src="libs/angular.min.js"></script>
     <script>
         requirejs.config({
             config: {
@@ -19,10 +20,23 @@
             },
             paths: {
                 es6: '../es6',
-                babel: '../babel-5.8.22.min'
-            }
+                babel: '../babel-5.8.22.min',
+            },
         });
     </script>
-    <script src="src/index.js"></script>
+    <script> 
+	angular.module('myModule', []).
+  	config(function($provide, $compileProvider, $filterProvider) {
+		      	$provide.value('a', 123);
+		        $provide.factory('a', function() {
+				var s = new Set();
+				s.add(233)
+				return s; });
+	});
+	define(['es6!myModule'], function(module) {
+		      console.log('yeah');
+	});	  
+    </script>
+    <!-- script src="src/index.js"></script -->
 </body>
 </html>
